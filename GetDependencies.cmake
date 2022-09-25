@@ -15,11 +15,11 @@ FetchContent_Declare(SDL2
                      URL "https://github.com/libsdl-org/SDL/archive/refs/tags/release-${SDL2_RELEASE_VERSION}.zip")
 FetchContent_MakeAvailable(SDL2)
 
-set(SDL2_INCLUDE_DIRS 
-    ${CMAKE_CURRENT_BINARY_DIR}/_deps/sdl2-src/include)
+set(SDL2_INCLUDE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/_deps/sdl2-src/include)
+set(SDL2_LIBRARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/_deps/sdl2-build/Debug)
 set(SDL2_LIBRARIES 
-    ${CMAKE_CURRENT_BINARY_DIR}/_deps/sdl2-build/Debug/SDL2d.lib
-    ${CMAKE_CURRENT_BINARY_DIR}/_deps/sdl2-build/Debug/SDL2maind.lib)
+    ${SDL2_LIBRARY_DIR}/SDL2d.lib
+    ${SDL2_LIBRARY_DIR}/SDL2maind.lib)
 
 ####################################################################################################
 # Set overall project dependency variables

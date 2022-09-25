@@ -1,23 +1,23 @@
 #include "Window.hpp"
 
-#include "SDL.h"
+#include "Logger.hpp"
 
-#include <iostream>
+#include "SDL.h"
 
 int main(int argc, char* args[])
 {
-   std::cout << "%% Enter main()" << std::endl;
+   LOG_MESSAGE("Enter main()");
 
    if (0 != SDL_Init(SDL_INIT_VIDEO))
    {
-      std::cerr << "xx Failed to initialize the SDL2 library" << std::endl;
+      LOG_ERROR("Failed to initialize the SDL2 library");
       return -1;
    }
 
    auto window_optional = Graphics::Window::create();
    if (std::nullopt == window_optional)
    {
-      std::cerr << "xx Failed to create main window" << std::endl;
+      LOG_ERROR("Failed to create main window");
       return -1;
    }
 
@@ -30,6 +30,6 @@ int main(int argc, char* args[])
 
    SDL_Quit();
 
-   std::cout << "%% Exit main()" << std::endl;
+   LOG_MESSAGE("Exit main()");
    return 0;
 }

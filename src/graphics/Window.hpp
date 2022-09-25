@@ -16,18 +16,19 @@ public:
 
    Window() = delete;
    Window(const Window&) = delete;
-   Window(Window&&) = default;
-
-   Window& operator=(const Window&) = delete;
-   Window& operator=(Window&&) = default;
+   Window(Window&& other);
 
    virtual ~Window();
 
+   Window& operator=(const Window&) = delete;
+   Window& operator=(Window&& rhs);
+
    static std::optional<Window> create();
 
+   // @warning Teardown any window before exiting the SDL for the sake of cleanliness
    virtual void teardown();
 
-   virtual void update_surface() const;
+   virtual void update_surface();
 
 private:
 

@@ -13,7 +13,7 @@
 
 ## Known Issues
 * The first attempt to cmake --build will fail, rerun the build to correct the issue
-* The SDL2.dll must be manually copied to be colocated with the 2DPlatformer.exe file to run
+* Only debug builds supported currently
 
 # Contributing
 ## Style Guide

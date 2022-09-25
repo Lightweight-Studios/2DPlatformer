@@ -14,12 +14,12 @@ public:
 
    Surface() = delete;
    Surface(const Surface&) = delete;
-   Surface(Surface&&) = default;
-
-   Surface& operator=(const Surface&) = delete;
-   Surface& operator=(Surface&&) = default;
+   Surface(Surface&&);
 
    virtual ~Surface();
+
+   Surface& operator=(const Surface&) = delete;
+   Surface& operator=(Surface&& rhs);
 
    static std::optional<Surface> create(SDL_Surface* sdl_surface);
    

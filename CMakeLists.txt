@@ -6,7 +6,7 @@ message("%% Entering ${PROJECT_NAME} cmake project")
 project(${PROJECT_NAME})
 
 ####################################################################################################
-# List project options
+# List and/or log project options
 ## Turns off all logging
 option(SILENCE_LOGGING "Silence ${PROJECT_NAME} logging" OFF)
 message("%% SILENCE_LOGGING set to ${SILENCE_LOGGING}")
@@ -38,3 +38,11 @@ add_executable(${PROJECT_NAME}
                ${${PROJECT_NAME}_HEADER_FILES})
 target_link_libraries(${PROJECT_NAME} 
                       ${${PROJECT_NAME}_DEPENDENCY_LIBRARIES})
+
+####################################################################################################
+# Specify custom build steps
+## Move the SDL.dll into the build directory
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                   ${SDL2_LIBRARY_DIR}/SDL2d.dll
+                   ${CMAKE_CURRENT_BINARY_DIR}/Debug)
