@@ -1,9 +1,20 @@
 ####################################################################################################
 # Fundamental project setup
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.23)
 set(PROJECT_NAME "2DPlatformer")
 message("%% Entering ${PROJECT_NAME} cmake project")
 project(${PROJECT_NAME})
+
+####################################################################################################
+# List project options
+## Enables unit testing in build
+option(BUILD_UNIT_TESTS "Build ${PROJECT_NAME} unit tests" OFF)
+message("%% BUILD_UNIT_TESTS set to ${BUILD_UNIT_TESTS}")
+
+####################################################################################################
+# Establish project standards
+message("%% Using C++20")
+set(CMAKE_CXX_STANDARD 20)
 
 ####################################################################################################
 # Make necessary inclusions and add relevant subdirectories
