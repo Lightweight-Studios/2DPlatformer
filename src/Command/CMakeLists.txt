@@ -3,7 +3,7 @@ message("%% Entering command")
 ####################################################################################################
 # Set source files
 set(COMMAND_SOURCE_FILES
-    
+
     #${CMAKE_CURRENT_LIST_DIR}/
     ${CMAKE_CURRENT_LIST_DIR}/InitJump.cpp
     ${CMAKE_CURRENT_LIST_DIR}/InitMoveRight.cpp
@@ -11,7 +11,7 @@ set(COMMAND_SOURCE_FILES
     ${CMAKE_CURRENT_LIST_DIR}/StopMoveRight.cpp
     ${CMAKE_CURRENT_LIST_DIR}/StopMoveLeft.cpp
     ${CMAKE_CURRENT_LIST_DIR}/NullCommand.cpp
-    
+
 
     CACHE INTERNAL "COMMAND_SOURCE_FILES")
 
