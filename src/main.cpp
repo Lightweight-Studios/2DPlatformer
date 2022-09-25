@@ -14,20 +14,19 @@ int main(int argc, char* args[])
       return -1;
    }
 
-   auto& window = Graphics::Window::instance();
+   auto window_optional = Graphics::Window::create();
+   if (std::nullopt == window_optional)
+   {
+      std::cerr << "xx Failed to create main window" << std::endl;
+      return -1;
+   }
 
-   // auto window_surface = SDL_GetWindowSurface(s_Window);
-
-   // if (nullptr == window_surface)
-   // {
-   //    std::cerr << "xx Failed to get the surface from the window" << std::endl;
-   //    return -1;
-   // }
-
-   // SDL_UpdateWindowSurface(s_Window);
+   auto window = Graphics::Window(std::move(window_optional.value()));
+   window.update_surface();
 
    SDL_Delay(5000);
 
+   window.teardown();
 
    SDL_Quit();
 

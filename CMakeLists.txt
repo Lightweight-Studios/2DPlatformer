@@ -7,6 +7,10 @@ project(${PROJECT_NAME})
 
 ####################################################################################################
 # List project options
+## Turns off all logging
+option(SILENCE_LOGGING "Silence ${PROJECT_NAME} logging" OFF)
+message("%% SILENCE_LOGGING set to ${SILENCE_LOGGING}")
+
 ## Enables unit testing in build
 option(BUILD_UNIT_TESTS "Build ${PROJECT_NAME} unit tests" OFF)
 message("%% BUILD_UNIT_TESTS set to ${BUILD_UNIT_TESTS}")
