@@ -4,7 +4,12 @@
 
 class StopMoveRight : public Command {
 
-	public void execute() override {
+public:
+	StopMoveRight() = default;
+
+	~StopMoveRight() = default;
+
+	void execute() override {
 		std::cout << "StopMoveRight command ran";
 	}
 

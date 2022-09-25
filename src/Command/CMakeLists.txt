@@ -1,27 +1,39 @@
-message("%% Entering src")
+message("%% Entering command")
 
 ####################################################################################################
 # Set source files
-set(${PROJECT_NAME}_SOURCE_FILES
-
-    ${CMAKE_CURRENT_LIST_DIR}/main.cpp
-
+set(COMMAND_SOURCE_FILES
+    
     #${CMAKE_CURRENT_LIST_DIR}/
+    ${CMAKE_CURRENT_LIST_DIR}/InitJump.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/InitMoveRight.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/InitMoveLeft.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/StopMoveRight.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/StopMoveLeft.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/NullCommand.cpp
+    
 
-    CACHE INTERNAL "${PROJECT_NAME}_SOURCE_FILES")
+    CACHE INTERNAL "COMMAND_SOURCE_FILES")
 
 ####################################################################################################
 # Set header files
-set(${PROJECT_NAME}_HEADER_FILES
+set(COMMAND_HEADER_FILES
 
     #${CMAKE_CURRENT_LIST_DIR}/
+     ${CMAKE_CURRENT_LIST_DIR}/Command.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/InitJump.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/InitMoveRight.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/InitMoveLeft.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/StopMoveRight.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/StopMoveLeft.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/NullCommand.hpp
 
-    CACHE INTERNAL "${PROJECT_NAME}_HEADER_FILES")
+    CACHE INTERNAL "COMMAND_HEADER_FILES")
 
 ####################################################################################################
 # Set include dirs
-set(${PROJECT_NAME}_INCLUDE_DIRS
+set(COMMAND_INCLUDE_DIRS
 
-    #${CMAKE_CURRENT_LIST_DIR}/
+    ${CMAKE_CURRENT_LIST_DIR}
 
-    CACHE INTERNAL "${PROJECT_NAME}_INCLUDE_DIRS")
+    CACHE INTERNAL "COMMAND_INCLUDE_DIRS")

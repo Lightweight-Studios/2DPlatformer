@@ -1,7 +1,12 @@
 #pragma once
+#include "Command.hpp"
 
 class InitMoveLeft : public Command {
 
-	public void execute() override;
+public:
+	InitMoveLeft() = default;
+	~InitMoveLeft() = default;
+
+	void execute() override;
 
 }

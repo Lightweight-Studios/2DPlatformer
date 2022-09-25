@@ -4,7 +4,13 @@
 
 class StopMoveLeft : public Command {
 
-	public void execute() override {
+public:
+
+	StopMoveLeft() = default;
+
+	~StopMoveLeft() = default;
+
+	void execute() override {
 		std::cout << "StopMoveLeft command ran";
 	}
 

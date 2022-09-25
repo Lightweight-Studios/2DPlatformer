@@ -1,6 +1,11 @@
 #pragma once
 class InitMoveRight : public Command {
 
-	public void execute() override;
+public:
+	InitMoveRight() = default;
+
+	~InitMoveRight() = default;
+
+	void execute() override;
 
 }
