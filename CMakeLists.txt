@@ -6,10 +6,13 @@ message("%% Entering ${PROJECT_NAME} cmake project")
 project(${PROJECT_NAME})
 
 ####################################################################################################
-# List and/or log project options
+# List and handle project options
 ## Turns off all logging
 option(SILENCE_LOGGING "Silence ${PROJECT_NAME} logging" OFF)
 message("%% SILENCE_LOGGING set to ${SILENCE_LOGGING}")
+if(SILENCE_LOGGING)
+   add_definitions(-DSILENCE_LOGGING=1)
+endif()
 
 ## Enables unit testing in build
 option(BUILD_UNIT_TESTS "Build ${PROJECT_NAME} unit tests" OFF)

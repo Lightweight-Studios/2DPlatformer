@@ -22,8 +22,8 @@
 
 #else 
 
-   #define LOG_MESSAGE(message) (void)
-   #define LOG_WARNING(warning) (void)
-   #define LOG_ERROR(error) (void)
+   #define LOG_MESSAGE(message); // do nothing
+   #define LOG_WARNING(warning); // do nothing
+   #define LOG_ERROR(error); // do nothing
 
 #endif
