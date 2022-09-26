@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Renderer.hpp"
 #include "Surface.hpp"
 
+#include <memory>
 #include <optional>
 
 // Forward declarations
@@ -10,6 +12,7 @@ class SDL_Window;
 namespace Graphics
 {
 
+// @warning This class is not thread safe
 class Window
 {
 public:
@@ -26,18 +29,21 @@ public:
    static std::optional<Window> create();
 
    // @warning Teardown any window before exiting the SDL for the sake of cleanliness
-   virtual void teardown();
+   void teardown();
 
-   virtual void update_surface();
+   const Renderer& get_renderer() const;
+
+   // std::optional<Surface> get_current_surface() const;
+   void update_surface();
 
 private:
 
-   Window(SDL_Window* sdl_window, Surface&& current_surface);
+   Window(SDL_Window* sdl_window, Renderer&& renderer);
 
    void teardown_internal();
 
    SDL_Window* m_sdl_window = nullptr;
-   Surface m_current_surface;
+   std::unique_ptr<Renderer> m_renderer;
 
 };
 

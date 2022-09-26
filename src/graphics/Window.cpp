@@ -15,18 +15,19 @@ namespace
    constexpr int DEFAULT_WINDOW_HEIGHT = 480;
 }
 
-Window::Window(SDL_Window* sdl_window, Surface&& current_surface) :
+Window::Window(SDL_Window* sdl_window, Renderer&& renderer) :
    m_sdl_window(sdl_window),
-   m_current_surface(std::move(current_surface))
+   m_renderer(std::make_unique<Renderer>(std::move(renderer)))
 {
    assert(nullptr != sdl_window);
 }
 
 Window::Window(Window&& other) :
    m_sdl_window(other.m_sdl_window),
-   m_current_surface(std::move(other.m_current_surface))
+   m_renderer(std::move(other.m_renderer))
 {
    other.m_sdl_window = nullptr;
+   other.m_renderer = nullptr;
 }
 
 Window::~Window()
@@ -39,8 +40,9 @@ Window& Window::operator=(Window&& rhs)
    if (this != &rhs)
    {
       this->m_sdl_window = rhs.m_sdl_window;
-      this->m_current_surface = std::move(rhs.m_current_surface);
+      this->m_renderer = std::move(rhs.m_renderer);
       rhs.m_sdl_window = nullptr;
+      rhs.m_renderer = nullptr;
    }
 
    return *this;
@@ -60,15 +62,20 @@ std::optional<Window> Window::create()
       return std::nullopt;
    }
 
-   auto surface_optional = Surface::create(SDL_GetWindowSurface(sdl_window));
-   if (std::nullopt == surface_optional)
+   auto renderer_optional = Renderer::create(SDL_CreateRenderer(sdl_window, 
+                                                                -1, 
+                                                                SDL_RENDERER_ACCELERATED));
+   if (std::nullopt == renderer_optional)
    {
-      LOG_ERROR("Failed to create a Surface");
+      LOG_ERROR("Failed to create a Renderer, SDL error: " << SDL_GetError());
       SDL_DestroyWindow(sdl_window);
       return std::nullopt;
    }
 
-   return std::optional<Window>({sdl_window, std::move(surface_optional.value())});
+   // Make sure window surface is loaded, even if we don't care about it at this moment otherwise
+   SDL_GetWindowSurface(sdl_window);
+
+   return std::optional<Window>({sdl_window, std::move(renderer_optional.value())});
 }
 
 void Window::teardown()
@@ -78,7 +85,7 @@ void Window::teardown()
 
 void Window::teardown_internal()
 {
-   m_current_surface.teardown();
+   m_renderer.reset();
 
    if (nullptr != m_sdl_window)
    {
@@ -86,6 +93,28 @@ void Window::teardown_internal()
       m_sdl_window = nullptr;
    }
 }
+
+const Renderer& Window::get_renderer() const
+{
+   return *m_renderer.get();
+}
+
+// std::optional<Surface> Window::get_current_surface() const
+// {
+//    if (nullptr == m_sdl_window)
+//    {
+//       LOG_ERROR("m_sdl_window is null");
+//       return std::nullopt;
+//    }
+
+//    auto surface_optional = Surface::create(SDL_GetWindowSurface(m_sdl_window));
+//    if (std::nullopt == surface_optional)
+//    {
+//       LOG_ERROR("Failed to create a Surface, SDL error: " << SDL_GetError());
+//    }
+
+//    return surface_optional;
+// }
 
 void Window::update_surface()
 {

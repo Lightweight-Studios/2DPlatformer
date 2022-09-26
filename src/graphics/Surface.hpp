@@ -8,6 +8,7 @@ class SDL_Surface;
 namespace Graphics
 {
 
+// @warning This class is not thread safe
 class Surface
 {
 public:
@@ -23,6 +24,7 @@ public:
 
    static std::optional<Surface> create(SDL_Surface* sdl_surface);
    
+   // @warning Tear down any held surfaces before exiting the SDL for the sake of cleanliness
    void teardown();
 
 private:
