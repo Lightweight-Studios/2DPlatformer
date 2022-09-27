@@ -1,5 +1,6 @@
 #include "Window.hpp"
 
+#include "Graphics.hpp"
 #include "Logger.hpp"
 
 #include "SDL.h"
@@ -8,11 +9,7 @@ int main(int argc, char* args[])
 {
    LOG_MESSAGE("Enter main()");
 
-   if (0 != SDL_Init(SDL_INIT_VIDEO))
-   {
-      LOG_ERROR("Failed to initialize the SDL2 library");
-      return -1;
-   }
+   Graphics::initialize();
 
    auto window_optional = Graphics::Window::create();
    if (std::nullopt == window_optional)
@@ -34,7 +31,7 @@ int main(int argc, char* args[])
 
    window.teardown();
 
-   SDL_Quit();
+   Graphics::teardown();
 
    LOG_MESSAGE("Exit main()");
    return 0;

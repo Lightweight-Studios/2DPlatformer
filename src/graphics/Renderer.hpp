@@ -24,6 +24,8 @@ public:
    Renderer& operator=(Renderer&& rhs);
 
    static std::optional<Renderer> create(SDL_Renderer* sdl_renderer);
+
+   bool set_draw_color();
    
 private:
 

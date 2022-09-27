@@ -4,6 +4,8 @@ message("%% Entering graphics")
 # Set source files
 set(GRAPHICS_SOURCE_FILES
 
+    ${CMAKE_CURRENT_LIST_DIR}/Graphics.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/GraphicsDefs.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Renderer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Surface.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Window.cpp
@@ -14,6 +16,8 @@ set(GRAPHICS_SOURCE_FILES
 # Set header files
 set(GRAPHICS_HEADER_FILES
 
+    ${CMAKE_CURRENT_LIST_DIR}/Graphics.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/GraphicsDefs.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Renderer.hpp    
     ${CMAKE_CURRENT_LIST_DIR}/Surface.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Window.hpp

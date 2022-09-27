@@ -43,6 +43,13 @@ std::optional<Renderer> Renderer::create(SDL_Renderer* sdl_renderer)
 {
    if (nullptr != sdl_renderer)
    {
+      // Set default renderer draw color to white
+      if (0 != SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF ))
+      {
+         LOG_WARNING("Failed to set default Renderer draw color to white, SDL Error: " << 
+                     SDL_GetError());
+      }
+
       return Renderer(sdl_renderer);
    }
 
