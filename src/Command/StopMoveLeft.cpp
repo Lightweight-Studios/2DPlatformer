@@ -1,6 +1,5 @@
 #include "Command.hpp"
-#include "<string>"
-#include "<iostream>"
+#include "Logger.hpp"
 
 class StopMoveLeft : public Command {
 
@@ -11,7 +10,7 @@ public:
 	~StopMoveLeft() = default;
 
 	void execute() override {
-		std::cout << "StopMoveLeft command ran";
+		LOG_MESSAGE("StopMoveLeft command ran");
 	}
 
 }

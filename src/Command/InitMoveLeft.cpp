@@ -1,6 +1,5 @@
 #include "Command.hpp"
-#include "<string>"
-#include "<iostream>"
+#include "Logger.hpp"
 
 class InitMoveLeft : public Command {
 	public:
@@ -10,7 +9,7 @@ class InitMoveLeft : public Command {
 		~InitMoveLeft() = default;
 
 		void execute override() {
-			std::cout << "InitMoveLeft command ran";
+			LOG_MESSAGE("InitMoveLeft command ran");
 		}
 
 };

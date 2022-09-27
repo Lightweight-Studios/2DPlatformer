@@ -1,6 +1,11 @@
 #pragma once
-class InitMoveRight : public Command {
+#include "Command.hpp"
+class NullCommand : public Command {
 
-	public void execute() override;
+public:
+	NullCommand() = default;
+	~NullCommand() = default;
+
+	void execute() override;
 
 }

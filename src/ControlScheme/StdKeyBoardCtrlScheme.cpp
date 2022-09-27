@@ -1,3 +1,4 @@
+#include "StdKeyBoardCtrlScheme.hpp"
 #include <map>
 #include <vector>
 #include "Command.hpp"
@@ -7,7 +8,6 @@
 #include "StopMoveRight.hpp"
 #include "InitJump.hpp"
 #include "NullCommand.hpp"
-#include "ControlScheme.hpp"
 #include "SDL.h"
 
 
@@ -23,22 +23,17 @@ class StdKeyControlScheme : public ControlScheme {
 			keyup will be the second element
 			*/
 			
-			InitMoveLeft initMoveLeft = new InitMoveLeft();
-			StopMoveLeft stopMoveLeft = new StopMoveLeft();
-			vector<Command> handleMoveLeft = { initMoveLeft, stopMoveLeft };
-			scheme.insert(std::make_pair(SDLK_a, handleMoveLeft));
+			vector<Command> handleMoveLeft = { InitMoveLeft(), StopMoveLeft() };
+			scheme.emplace((SDLK_a, handleMoveLeft);
 
-			InitMoveRight initMoveRight = new InitMoveRight();
-			StopMoveRight stopMoveRight = new StopMoveRight();
-			vector<Command> handleMoveRight = { initMoveRight, initMoveRight };
-			sceme.insert(std::make_pair(SDLK_d, handleMoveRight));
+			vector<Command> handleMoveRight = { InitMoveRight(), StopMoveRight() };
+			sceme.emplace(SDLK_d, handleMoveRight);
 
-			InitJump initJump = new InitJump();
-			vector<Command> handleJump = { initJump };
-			scheme.insert(std::make_pair(SDLK_w, handleJump)
+			vector<Command> handleJump = { InitJump() };
+			scheme.emplace(SDLK_w, handleJump);
 		}
 		
-		void translate override(*SDL_Event evt) {
+		Command translate override(*SDL_Event evt) {
 			try {
 				vector<Command> translatedEvent = scheme.at(*evt);
 				if ((translatedEvent.length == 1) || (translatedEvent.length > 1 && *evt.type == SDL_KEYDOWN))){
@@ -54,7 +49,7 @@ class StdKeyControlScheme : public ControlScheme {
 				}
 			}
 			catch (std::out_of_range) {
-				return new NullCommand();
+				return NullCommand();
 			}
 			
 		}

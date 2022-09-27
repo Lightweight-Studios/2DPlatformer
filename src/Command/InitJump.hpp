@@ -3,6 +3,10 @@
 
 class InitJump : public Command {
 	
-	public void execute() override;
+public:
+	InitJump() = default;
+	~InitJump() = default;
+
+	void execute() override;
 
 }
