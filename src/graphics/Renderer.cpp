@@ -44,14 +44,10 @@ std::optional<Renderer> Renderer::create(SDL_Renderer* i_sdl_renderer)
 {
    if (nullptr != i_sdl_renderer)
    {
-      // Set default renderer draw color to white
-      if (0 != SDL_SetRenderDrawColor(i_sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF ))
-      {
-         LOG_WARNING("Failed to set default Renderer draw color to white, SDL Error: " << 
-                     SDL_GetError());
-      }
-
-      return Renderer(i_sdl_renderer);
+      // Create renderer and set a default draw color just because
+      auto renderer = Renderer(i_sdl_renderer);
+      renderer.set_draw_color(Color::white);
+      return renderer;
    }
 
    LOG_ERROR("Null i_sdl_renderer passed to factory");
@@ -62,6 +58,7 @@ bool Renderer::render()
 {
    CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);
    SDL_RenderPresent(m_sdl_renderer);
+   SDL_RenderClear(m_sdl_renderer);
    return true;
 }
 

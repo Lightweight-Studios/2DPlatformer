@@ -25,6 +25,7 @@ int main(int argc, char* args[])
    // TODO: Remove, this is just test bed code (Enter your test bed code here)
    for (auto i=0; i<5; ++i)
    {
+      // Should see last draw color become exterior fill, happy accident - Bob Ross
       renderer.set_draw_color(static_cast<Color>(i+1));
       renderer.draw_shape();
       renderer.render();
