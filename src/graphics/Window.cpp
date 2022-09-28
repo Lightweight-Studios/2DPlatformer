@@ -15,11 +15,11 @@ namespace
    constexpr int DEFAULT_WINDOW_HEIGHT = 480;
 }
 
-Window::Window(SDL_Window* sdl_window, Renderer&& renderer) :
-   m_sdl_window(sdl_window),
+Window::Window(SDL_Window* i_sdl_window, Renderer&& renderer) :
+   m_sdl_window(i_sdl_window),
    m_renderer(std::make_unique<Renderer>(std::move(renderer)))
 {
-   assert(nullptr != sdl_window);
+   assert(nullptr != i_sdl_window);
 }
 
 Window::Window(Window&& other) :
@@ -94,7 +94,7 @@ void Window::teardown_internal()
    }
 }
 
-const Renderer& Window::get_renderer() const
+Renderer& Window::get_renderer() const
 {
    return *m_renderer.get();
 }

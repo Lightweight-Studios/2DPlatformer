@@ -31,14 +31,14 @@ public:
    // @warning Teardown any window before exiting the SDL for the sake of cleanliness
    void teardown();
 
-   const Renderer& get_renderer() const;
+   Renderer& get_renderer() const;
 
    // std::optional<Surface> get_current_surface() const;
    void update_surface();
 
 private:
 
-   Window(SDL_Window* sdl_window, Renderer&& renderer);
+   Window(SDL_Window* i_sdl_window, Renderer&& i_renderer);
 
    void teardown_internal();
 

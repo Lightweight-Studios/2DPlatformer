@@ -8,10 +8,10 @@
 
 using namespace Graphics;
 
-Surface::Surface(SDL_Surface* sdl_surface) :
-   m_sdl_surface(sdl_surface)
+Surface::Surface(SDL_Surface* i_sdl_surface) :
+   m_sdl_surface(i_sdl_surface)
 {
-   assert(nullptr != sdl_surface);
+   assert(nullptr != i_sdl_surface);
 }
 
 Surface::Surface(Surface&& other) :
@@ -36,11 +36,11 @@ Surface& Surface::operator=(Surface&& rhs)
    return *this;
 }
 
-std::optional<Surface> Surface::create(SDL_Surface* sdl_surface)
+std::optional<Surface> Surface::create(SDL_Surface* i_sdl_surface)
 {
-   if (nullptr != sdl_surface)
+   if (nullptr != i_sdl_surface)
    {
-      return Surface(sdl_surface);
+      return Surface(i_sdl_surface);
    }
 
    LOG_ERROR("Null sdl_surface passed to factory");

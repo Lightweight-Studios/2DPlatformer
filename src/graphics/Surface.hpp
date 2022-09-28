@@ -22,14 +22,14 @@ public:
    Surface& operator=(const Surface&) = delete;
    Surface& operator=(Surface&& rhs);
 
-   static std::optional<Surface> create(SDL_Surface* sdl_surface);
+   static std::optional<Surface> create(SDL_Surface* i_sdl_surface);
    
    // @warning Tear down any held surfaces before exiting the SDL for the sake of cleanliness
    void teardown();
 
 private:
 
-   Surface(SDL_Surface* sdl_surface);
+   Surface(SDL_Surface* i_sdl_surface);
 
    void teardown_internal();
 

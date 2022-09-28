@@ -19,12 +19,16 @@ int main(int argc, char* args[])
    }
 
    auto window = Graphics::Window(std::move(window_optional.value()));
+   auto& renderer = window.get_renderer();
 
    /////////////////////////////////////////////////////////////////////////////////////////////////
    // TODO: Remove, this is just test bed code (Enter your test bed code here)
    for (auto i=0; i<5; ++i)
    {
-      window.update_surface();
+      renderer.set_draw_color(static_cast<Color>(i+1));
+      renderer.draw_shape();
+      renderer.render();
+      //window.update_surface();
       SDL_Delay(1000);
    }
    /////////////////////////////////////////////////////////////////////////////////////////////////

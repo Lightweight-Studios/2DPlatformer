@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GraphicsDefs.hpp"
+
 #include <optional>
 
 // Forward declarations
@@ -23,13 +25,16 @@ public:
    Renderer& operator=(const Renderer&) = delete;
    Renderer& operator=(Renderer&& rhs);
 
-   static std::optional<Renderer> create(SDL_Renderer* sdl_renderer);
+   static std::optional<Renderer> create(SDL_Renderer* i_sdl_renderer);
 
-   bool set_draw_color();
+   bool render();
+
+   bool set_draw_color(RgbaColor color);
+   bool draw_shape();
    
 private:
 
-   Renderer(SDL_Renderer* sdl_renderer);
+   Renderer(SDL_Renderer* i_sdl_renderer);
 
    SDL_Renderer* m_sdl_renderer = nullptr;
 
