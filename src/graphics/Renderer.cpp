@@ -62,6 +62,24 @@ bool Renderer::render()
    return true;
 }
 
+std::optional<RgbaColor> Renderer::get_draw_color()
+{
+   CHECK_IF_POINTER_VALID_RETURN_NULLOPT(m_sdl_renderer);
+
+   RgbaColor o_color;
+   if (0 != SDL_GetRenderDrawColor(m_sdl_renderer, 
+                                   &o_color.m_r, 
+                                   &o_color.m_g, 
+                                   &o_color.m_b, 
+                                   &o_color.m_a))
+   {
+      LOG_WARNING("Failed to get draw color, SDL Error: " << SDL_GetError());
+      return std::nullopt;
+   }
+
+   return o_color;
+}
+
 bool Renderer::set_draw_color(RgbaColor color)
 {
    CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);

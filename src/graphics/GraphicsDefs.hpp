@@ -25,6 +25,7 @@ enum class Color
 
 struct RgbaColor
 {
+   RgbaColor() = default;
    RgbaColor(Color color, uint8_t alpha = 255);
 
    uint8_t m_r;

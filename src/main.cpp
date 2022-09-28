@@ -18,7 +18,7 @@ int main(int argc, char* args[])
       return -1;
    }
 
-   auto window = Graphics::Window(std::move(window_optional.value()));
+   auto& window = window_optional.value();
    auto& renderer = window.get_renderer();
 
    /////////////////////////////////////////////////////////////////////////////////////////////////

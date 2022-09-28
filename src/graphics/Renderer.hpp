@@ -29,7 +29,9 @@ public:
 
    bool render();
 
+   std::optional<RgbaColor> get_draw_color();
    bool set_draw_color(RgbaColor color);
+
    bool draw_shape();
    
 private:
