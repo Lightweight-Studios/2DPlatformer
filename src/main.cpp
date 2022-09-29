@@ -3,6 +3,8 @@
 #include "Graphics.hpp"
 #include "Logger.hpp"
 
+#include "StdKeyBoardCtrlScheme.hpp"
+
 #include "SDL.h"
 
 int main(int argc, char* args[])

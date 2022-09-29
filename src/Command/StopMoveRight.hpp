@@ -7,7 +7,8 @@ public:
 
 	StopMoveRight() = default;
 	~StopMoveRight() = default;
+	StopMoveRight(const StopMoveRight& smr) = default;
 
 	void execute() override;
 
-}
+};

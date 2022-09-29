@@ -1,16 +1,8 @@
-#include "Command.hpp"
+#include "StopMoveLeft.hpp"
 #include "Logger.hpp"
 
-class StopMoveLeft : public Command {
 
-public:
-
-	StopMoveLeft() = default;
-
-	~StopMoveLeft() = default;
-
-	void execute() override {
-		LOG_MESSAGE("StopMoveLeft command ran");
-	}
-
+void StopMoveLeft::execute() override {
+	LOG_MESSAGE("StopMoveLeft command ran");
 }
+

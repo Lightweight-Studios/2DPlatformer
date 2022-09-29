@@ -1,8 +1,7 @@
-#include "Command.hpp"
+#include "InitJump.hpp"
 #include "Logger.hpp"
 
-class InitJump : public Command {
-	public void execute() {
-		LOG_MESSAGE("InitJump command ran");
-	}
-};
+
+void InitJump::execute override() {
+	LOG_MESSAGE("InitJump command ran");
+}

@@ -1,15 +1,8 @@
-#include "Command.hpp"
+#include "InitMoveLeft.hpp"
 #include "Logger.hpp"
 
-class InitMoveLeft : public Command {
-	public:
 
-		InitMoveLeft() = default;
+void InitMoveLeft::execute override() {
+	LOG_MESSAGE("InitMoveLeft command ran");
+}
 
-		~InitMoveLeft() = default;
-
-		void execute override() {
-			LOG_MESSAGE("InitMoveLeft command ran");
-		}
-
-};

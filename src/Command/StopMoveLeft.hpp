@@ -3,6 +3,12 @@
 
 class StopMoveLeft : public Command {
 
-	public void execute() override;
+public:
 
-}
+	StopMoveLeft() = default;
+	~StopMoveLeft() = default;
+	StopMoveLeft(const StopMoveLeft& sml) = default;
+
+	void execute() override;
+
+};

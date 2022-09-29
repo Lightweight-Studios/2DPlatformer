@@ -4,12 +4,16 @@ message("%% Entering src")
 # Make necessary inclusions and add relevant subdirectories
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/graphics)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/logging)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/ControlScheme)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Command)
 
 ####################################################################################################
 # Set source files
 set(${PROJECT_NAME}_SOURCE_FILES
     ${GRAPHICS_SOURCE_FILES}
     ${LOGGING_SOURCE_FILES}
+    ${CONTROL_SCHEME_FILES}
+    ${COMMAND_FILES}
 
     ${CMAKE_CURRENT_LIST_DIR}/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ProjectDefs.cpp
@@ -21,6 +25,8 @@ set(${PROJECT_NAME}_SOURCE_FILES
 set(${PROJECT_NAME}_HEADER_FILES
     ${GRAPHICS_HEADER_FILES}
     ${LOGGING_HEADER_FILES}
+    ${CONTROL_SCHEME_HEADER_FILES}
+    ${COMMAND_HEADER_FILES}
 
     ${CMAKE_CURRENT_LIST_DIR}/ProjectDefs.hpp
 
@@ -31,6 +37,8 @@ set(${PROJECT_NAME}_HEADER_FILES
 set(${PROJECT_NAME}_INCLUDE_DIRS
     ${GRAPHICS_INCLUDE_DIRS}
     ${LOGGING_INCLUDE_DIRS}
+    ${CONTROL_SCHEME_INCLUDE_DIRS}
+    ${COMMAND_INCLUDE_DIRS}
 
     ${CMAKE_CURRENT_LIST_DIR}
 
