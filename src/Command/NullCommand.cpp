@@ -1,6 +1,6 @@
 #include "NullCommand.hpp"
 #include "Logger.hpp"
 	
-void NullCommand::execute() override {
+void NullCommand::execute(){
 	LOG_MESSAGE("NullCommandExecuted");
 };

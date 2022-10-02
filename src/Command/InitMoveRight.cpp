@@ -2,7 +2,7 @@
 #include "Logger.hpp"
 
 
-void InitMoveRight::execute() override {
+void InitMoveRight::execute(){
 	LOG_MESSAGE("InitMoveRight command ran");
 }
 

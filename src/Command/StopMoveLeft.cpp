@@ -2,7 +2,7 @@
 #include "Logger.hpp"
 
 
-void StopMoveLeft::execute() override {
+void StopMoveLeft::execute(){
 	LOG_MESSAGE("StopMoveLeft command ran");
 }
 

@@ -2,6 +2,6 @@
 #include "Logger.hpp"
 
 
-void InitJump::execute override() {
+void InitJump::execute() {
 	LOG_MESSAGE("InitJump command ran");
 }
