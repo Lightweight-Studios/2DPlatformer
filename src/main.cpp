@@ -23,6 +23,7 @@ int main(int argc, char* args[])
    auto& window = window_optional.value();
    auto& renderer = window.get_renderer();
 
+D
    /////////////////////////////////////////////////////////////////////////////////////////////////
    // TODO: Remove, this is just test bed code (Enter your test bed code here)
    for (auto i=0; i<5; ++i)
@@ -35,6 +36,21 @@ int main(int argc, char* args[])
       SDL_Delay(1000);
    }
    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+   //StdKeyControlScheme input = StdKeyControlScheme();
+
+   ////SDL_Delay(30000);
+   //SDL_Event event;
+   //std::shared_ptr<Command> mappedCommand;
+
+   //while (true) {
+   //    while (SDL_PollEvent(&event)) {
+   //        LOG_MESSAGE("Keyboard Event Detected");
+   //        mappedCommand = input.translate(&event);
+   //        mappedCommand->execute();
+   //    }
+   //}
+   
 
    window.teardown();
 

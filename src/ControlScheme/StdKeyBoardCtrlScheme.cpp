@@ -37,8 +37,6 @@ StdKeyControlScheme::StdKeyControlScheme() {
 shared_ptr<Command> StdKeyControlScheme::translate(SDL_Event *evt) {
 	using std::vector;
 	try {
-		//Why doesn't this work?
-		//(*evt).key.keysym.sym
 		SDL_Keycode key = evt->key.keysym.sym;
 		vector<shared_ptr<Command>> translatedEvent = this->scheme.at(key);
 		if ((translatedEvent.size() == 1) || (translatedEvent.size() > 1 && (*evt).type == SDL_EventType::SDL_KEYDOWN)) {
@@ -50,7 +48,7 @@ shared_ptr<Command> StdKeyControlScheme::translate(SDL_Event *evt) {
 		}
 
 		else {
-			throw std::out_of_range("Command mis-specified!");
+			throw std::out_of_range("Command misspecified!");
 		}
 	}
 	catch (std::out_of_range) {

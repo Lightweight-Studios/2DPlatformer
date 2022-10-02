@@ -14,7 +14,7 @@ class StdKeyControlScheme : public ControlScheme {
 public:
 	StdKeyControlScheme();
 	~StdKeyControlScheme() = default;
-	virtual std::shared_ptr<Command> translate(SDL_Event *evt) = 0;
+	std::shared_ptr<Command> translate(SDL_Event *evt) override;
 
 
 private:
