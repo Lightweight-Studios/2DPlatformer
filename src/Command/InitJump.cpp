@@ -3,5 +3,5 @@
 
 
 void InitJump::execute() {
-	LOG_MESSAGE("InitJump command ran");
+   LOG_MESSAGE("InitJump command ran");
 }

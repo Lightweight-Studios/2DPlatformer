@@ -2,5 +2,6 @@
 #include "Logger.hpp"
 	
 void NullCommand::execute(){
-	LOG_MESSAGE("NullCommandExecuted");
+   LOG_MESSAGE("NullCommandExecuted");
 };
+

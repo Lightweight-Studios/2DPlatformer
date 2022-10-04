@@ -4,12 +4,12 @@ class NullCommand : public Command {
 
 public:
 
-	NullCommand() = default;
-	~NullCommand() = default;
-	NullCommand(const NullCommand& n) = default;
-	NullCommand(NullCommand&&) = default;
-	NullCommand& operator=(NullCommand&&) = default;
+   NullCommand() = default;
+   ~NullCommand() = default;
+   NullCommand(const NullCommand& n) = default;
+   NullCommand(NullCommand&&) = default;
+   NullCommand& operator=(NullCommand&&) = default;
 
-	void execute() override;
+   void execute() override;
 
 };

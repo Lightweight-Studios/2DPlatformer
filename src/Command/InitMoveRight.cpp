@@ -3,6 +3,6 @@
 
 
 void InitMoveRight::execute(){
-	LOG_MESSAGE("InitMoveRight command ran");
+   LOG_MESSAGE("InitMoveRight command ran");
 }
 

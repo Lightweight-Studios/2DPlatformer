@@ -18,6 +18,6 @@ public:
 
 
 private:
-	std::map<SDL_Keycode, std::vector<std::shared_ptr<Command>>> scheme;
+	std::map<SDL_Keycode, std::vector<std::shared_ptr<Command>>> m_scheme;
 
 };
