@@ -4,7 +4,6 @@ message("%% Entering command")
 # Set source files
 set(COMMAND_SOURCE_FILES
 
-    #${CMAKE_CURRENT_LIST_DIR}/
     ${CMAKE_CURRENT_LIST_DIR}/InitJump.cpp
     ${CMAKE_CURRENT_LIST_DIR}/InitMoveRight.cpp
     ${CMAKE_CURRENT_LIST_DIR}/InitMoveLeft.cpp
@@ -19,8 +18,7 @@ set(COMMAND_SOURCE_FILES
 # Set header files
 set(COMMAND_HEADER_FILES
 
-    #${CMAKE_CURRENT_LIST_DIR}/
-     ${CMAKE_CURRENT_LIST_DIR}/Command.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Command.hpp
     ${CMAKE_CURRENT_LIST_DIR}/InitJump.hpp
     ${CMAKE_CURRENT_LIST_DIR}/InitMoveRight.hpp
     ${CMAKE_CURRENT_LIST_DIR}/InitMoveLeft.hpp

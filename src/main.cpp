@@ -43,7 +43,7 @@ int main(int argc, char* args[])
    while (true) {
        while (SDL_PollEvent(&event)) {
            LOG_MESSAGE("Keyboard Event Detected");
-           mappedCommand = input.translate(&event);
+           mappedCommand = input.translate_key_evt_to_command(&event);
            mappedCommand->execute();
        }
    }

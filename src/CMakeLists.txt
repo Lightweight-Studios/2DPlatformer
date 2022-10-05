@@ -11,7 +11,7 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/logging)
 ####################################################################################################
 # Set source files
 set(${PROJECT_NAME}_SOURCE_FILES
-    ${CONTROL_SCHEME_FILES}
+    ${CONTROL_SCHEME_SOURCE_FILES}
     ${COMMAND_SOURCE_FILES}
     ${GRAPHICS_SOURCE_FILES}
     ${LOGGING_SOURCE_FILES}

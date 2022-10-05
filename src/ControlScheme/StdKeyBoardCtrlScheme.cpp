@@ -1,7 +1,7 @@
 #include "StdKeyBoardCtrlScheme.hpp"
 #include <map>
 #include <vector>
-#include<memory>
+#include <memory>
 #include <stdexcept>
 #include "Command.hpp"
 #include "InitMoveLeft.hpp"
@@ -9,8 +9,10 @@
 #include "InitMoveRight.hpp"
 #include "StopMoveRight.hpp"
 #include "InitJump.hpp"
+#include "Logger.hpp"
 #include "NullCommand.hpp"
 #include "SDL.h"
+#include "ProjectDefs.hpp"
 
 using std::vector; using std::shared_ptr;
 
@@ -23,36 +25,42 @@ StdKeyControlScheme::StdKeyControlScheme() {
 	keyup will be the second element
 	*/
 	
-
 	vector<shared_ptr<Command>> handleMoveLeft = { std::make_shared<InitMoveLeft>(), std::make_shared<StopMoveLeft>() };
-	this->m_scheme.emplace(SDLK_a, handleMoveLeft);
-
+	this->m_key_evt_to_command_map.emplace(SDLK_a, std::move(handleMoveLeft));
+	
 	vector<shared_ptr<Command>> handleMoveRight = { shared_ptr<Command>(new InitMoveRight()), shared_ptr<Command>(new StopMoveRight()) };
-	this->m_scheme.emplace(SDLK_d, handleMoveRight);
-
+	this->m_key_evt_to_command_map.emplace(SDLK_d, std::move(handleMoveRight));
+	
 	vector<shared_ptr<Command>> handleJump = { shared_ptr<Command>(new InitJump()) };
-	this->m_scheme.emplace(SDLK_w, handleJump);
+	this->m_key_evt_to_command_map.emplace(SDLK_w, std::move(handleJump));
+
+
+	//this->m_key_evt_to_command_map.emplace(SDLK_a, { std::make_shared<InitMoveLeft>(), std::make_shared<StopMoveLeft>() });
+	//this->m_key_evt_to_command_map.emplace(SDLK_d, { std::make_shared<InitMoveRight>(), std::make_shared<StopMoveRight>() });
+	//this->m_key_evt_to_command_map.emplace(SDLK_w, { std::make_shared<InitJump>());
 }
 		
-shared_ptr<Command> StdKeyControlScheme::translate(SDL_Event *evt) {
+shared_ptr<Command> StdKeyControlScheme::translate_key_evt_to_command(SDL_Event *evt) {
 	using std::vector;
+	CHECK_IF_POINTER_VALID(evt);
 	try {
 		SDL_Keycode key = evt->key.keysym.sym;
-		vector<shared_ptr<Command>> translatedEvent = this->m_scheme.at(key);
-		if ((translatedEvent.size() == 1) || (translatedEvent.size() > 1 && (*evt).type == SDL_EventType::SDL_KEYDOWN)) {
+		vector<shared_ptr<Command>> translatedEvent = this->m_key_evt_to_command_map.at(key);
+		if ((translatedEvent.size() == 1) || (translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYDOWN)) {
 			return translatedEvent[0];
 		}
 
-		else if(translatedEvent.size() > 1 && (*evt).type == SDL_EventType::SDL_KEYUP) {
+		else if(translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYUP) {
 			return translatedEvent[1];
 		}
 
 		else {
-			throw std::out_of_range("Command misspecified!");
+			LOG_MESSAGE("No command specified for key");
+			return std::make_shared<NullCommand>();
 		}
 	}
 	catch (std::out_of_range) {
-		return shared_ptr<Command>(new NullCommand());
+		return std::make_shared<NullCommand>();
 	}
 			
 }
