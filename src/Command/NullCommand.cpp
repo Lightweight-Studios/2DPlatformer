@@ -1,9 +1,7 @@
-#include "Command.hpp"
-class NullCommand : public Command {
+#include "NullCommand.hpp"
+#include "Logger.hpp"
+	
+void NullCommand::execute(){
+   LOG_MESSAGE("NullCommand Ran");
+};
 
-public:
-	NullCommand() = default;
-	~NullCommand() = default;
-	void execute() override {};
-
-}

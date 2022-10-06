@@ -1,16 +1,8 @@
-#include "Command.hpp"
-#include "<string>"
-#include "<iostream>"
+#include "InitMoveLeft.hpp"
+#include "Logger.hpp"
 
-class InitMoveLeft : public Command {
-	public:
 
-		InitMoveLeft() = default;
+void InitMoveLeft::execute() {
+   LOG_MESSAGE("InitMoveLeft command ran");
+}
 
-		~InitMoveLeft() = default;
-
-		void execute override() {
-			std::cout << "InitMoveLeft command ran";
-		}
-
-};

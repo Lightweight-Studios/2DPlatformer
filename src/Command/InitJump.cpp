@@ -1,9 +1,7 @@
-#include "Command.hpp"
-#include "<string>"
-#include "<iostream>"
+#include "InitJump.hpp"
+#include "Logger.hpp"
 
-class InitJump : public Command {
-	public void execute() {
-		std::cout << "InitJump command ran"
-	}
-};
+
+void InitJump::execute() {
+   LOG_MESSAGE("InitJump command ran");
+}

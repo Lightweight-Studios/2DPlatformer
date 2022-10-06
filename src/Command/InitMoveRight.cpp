@@ -1,11 +1,8 @@
-#include "Command.hpp"
-#include "<string>"
-#include "<iostream>"
+#include "InitMoveRight.hpp"
+#include "Logger.hpp"
 
-class InitMoveRight : public Command {
 
-	public void execute() override {
-		std::cout << "InitMoveRight command ran";
-	}
-
+void InitMoveRight::execute(){
+   LOG_MESSAGE("InitMoveRight command ran");
 }
+

@@ -3,6 +3,8 @@
 #include "Graphics.hpp"
 #include "Logger.hpp"
 
+#include "StdKeyBoardCtrlScheme.hpp"
+
 #include "SDL.h"
 
 int main(int argc, char* args[])
@@ -21,18 +23,34 @@ int main(int argc, char* args[])
    auto& window = window_optional.value();
    auto& renderer = window.get_renderer();
 
+
    /////////////////////////////////////////////////////////////////////////////////////////////////
    // TODO: Remove, this is just test bed code (Enter your test bed code here)
-   for (auto i=0; i<5; ++i)
-   {
-      // Should see last draw color become exterior fill, happy accident - Bob Ross
-      renderer.set_draw_color(static_cast<Color>(i+1));
-      renderer.draw_shape();
-      renderer.render();
-      //window.update_surface();
-      SDL_Delay(1000);
+   //for (auto i=0; i<5; ++i)
+   //{
+   //   // Should see last draw color become exterior fill, happy accident - Bob Ross
+   //   renderer.set_draw_color(static_cast<Color>(i+1));
+   //   renderer.draw_shape();
+   //   renderer.render();
+   //   //window.update_surface();
+   //   SDL_Delay(1000);
+   //}
+   StdKeyControlScheme input = StdKeyControlScheme();
+
+   SDL_Event event;
+   std::shared_ptr<Command> mappedCommand;
+
+   while (true) {
+       while (SDL_PollEvent(&event)) {
+           LOG_MESSAGE("Keyboard Event Detected");
+           mappedCommand = input.translate_key_evt_to_command(&event);
+           mappedCommand->execute();
+       }
    }
+
    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
    window.teardown();
 

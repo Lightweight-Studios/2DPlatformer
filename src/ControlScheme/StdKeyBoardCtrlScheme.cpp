@@ -1,66 +1,66 @@
-#include <map>
-#include <vector>
+#include "StdKeyBoardCtrlScheme.hpp"
 #include "Command.hpp"
 #include "InitMoveLeft.hpp"
 #include "StopMoveLeft.hpp"
 #include "InitMoveRight.hpp"
 #include "StopMoveRight.hpp"
 #include "InitJump.hpp"
+#include "Logger.hpp"
 #include "NullCommand.hpp"
-#include "ControlScheme.hpp"
-#include "SDL.h"
+#include "ProjectDefs.hpp"
+
+using std::vector; using std::shared_ptr;
+
+StdKeyControlScheme::StdKeyControlScheme() {
+	/*
+	Create the mapping
+
+	The convention we follow is that an action to be taken on keydown
+	will be the first element in the vector, an an action to be take on 
+	keyup will be the second element
+	*/
+	
+	vector<shared_ptr<Command>> handleMoveLeft = { std::make_shared<InitMoveLeft>(), std::make_shared<StopMoveLeft>() };
+	this->m_key_evt_to_command_map.emplace(SDLK_a, std::move(handleMoveLeft));
+	
+	vector<shared_ptr<Command>> handleMoveRight = { shared_ptr<Command>(new InitMoveRight()), shared_ptr<Command>(new StopMoveRight()) };
+	this->m_key_evt_to_command_map.emplace(SDLK_d, std::move(handleMoveRight));
+	
+	vector<shared_ptr<Command>> handleJump = { shared_ptr<Command>(new InitJump()) };
+	this->m_key_evt_to_command_map.emplace(SDLK_w, std::move(handleJump));
 
 
-class StdKeyControlScheme : public ControlScheme {
-
-	public:
-		StdKeyControlScheme() {
-			/*
-			Create the mapping
-
-			The convention we follow is that an action to be taken on keydown
-			will be the first element in the vector, an an action to be take on 
-			keyup will be the second element
-			*/
-			
-			InitMoveLeft initMoveLeft = new InitMoveLeft();
-			StopMoveLeft stopMoveLeft = new StopMoveLeft();
-			vector<Command> handleMoveLeft = { initMoveLeft, stopMoveLeft };
-			scheme.insert(std::make_pair(SDLK_a, handleMoveLeft));
-
-			InitMoveRight initMoveRight = new InitMoveRight();
-			StopMoveRight stopMoveRight = new StopMoveRight();
-			vector<Command> handleMoveRight = { initMoveRight, initMoveRight };
-			sceme.insert(std::make_pair(SDLK_d, handleMoveRight));
-
-			InitJump initJump = new InitJump();
-			vector<Command> handleJump = { initJump };
-			scheme.insert(std::make_pair(SDLK_w, handleJump)
-		}
+	//this->m_key_evt_to_command_map.emplace(SDLK_a, { std::make_shared<InitMoveLeft>(), std::make_shared<StopMoveLeft>() });
+	//this->m_key_evt_to_command_map.emplace(SDLK_d, { std::make_shared<InitMoveRight>(), std::make_shared<StopMoveRight>() });
+	//this->m_key_evt_to_command_map.emplace(SDLK_w, { std::make_shared<InitJump>());
+}
 		
-		void translate override(*SDL_Event evt) {
-			try {
-				vector<Command> translatedEvent = scheme.at(*evt);
-				if ((translatedEvent.length == 1) || (translatedEvent.length > 1 && *evt.type == SDL_KEYDOWN))){
-					return translatedEvent[0];
-				}
+shared_ptr<Command> StdKeyControlScheme::translate_key_evt_to_command(SDL_Event *evt) {
+	using std::vector;
+	CHECK_IF_POINTER_VALID(evt);
 
-				else if(translatedEvent.length > 1 && *evt.type == SDL_KEYUP) {
-					return translatedEvent[1];
-				}
+	SDL_Keycode key = evt->key.keysym.sym;
 
-				else {
-					thow std::out_of_range("Command mis-specified!");
-				}
-			}
-			catch (std::out_of_range) {
-				return new NullCommand();
-			}
-			
+	if (m_key_evt_to_command_map.contains(key)) {
+		vector<shared_ptr<Command>> translatedEvent = m_key_evt_to_command_map.at(key);
+		if ((translatedEvent.size() == 1) || (translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYDOWN)) {
+			return translatedEvent[0];
 		}
 
+		else if (translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYUP) {
+			return translatedEvent[1];
+		}
+	}
 
-	private:
-		std::map<SDL_Event, Command> scheme;
 
-};
+	else {
+		LOG_MESSAGE("No command specified for key");
+		return std::make_shared<NullCommand>();
+	}
+
+			
+}
+
+
+	
+
