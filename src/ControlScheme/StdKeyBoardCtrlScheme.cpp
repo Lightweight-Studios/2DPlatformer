@@ -1,8 +1,4 @@
 #include "StdKeyBoardCtrlScheme.hpp"
-#include <map>
-#include <vector>
-#include <memory>
-#include <stdexcept>
 #include "Command.hpp"
 #include "InitMoveLeft.hpp"
 #include "StopMoveLeft.hpp"
@@ -11,7 +7,6 @@
 #include "InitJump.hpp"
 #include "Logger.hpp"
 #include "NullCommand.hpp"
-#include "SDL.h"
 #include "ProjectDefs.hpp"
 
 using std::vector; using std::shared_ptr;
@@ -43,25 +38,26 @@ StdKeyControlScheme::StdKeyControlScheme() {
 shared_ptr<Command> StdKeyControlScheme::translate_key_evt_to_command(SDL_Event *evt) {
 	using std::vector;
 	CHECK_IF_POINTER_VALID(evt);
-	try {
-		SDL_Keycode key = evt->key.keysym.sym;
-		vector<shared_ptr<Command>> translatedEvent = this->m_key_evt_to_command_map.at(key);
+
+	SDL_Keycode key = evt->key.keysym.sym;
+
+	if (m_key_evt_to_command_map.contains(key)) {
+		vector<shared_ptr<Command>> translatedEvent = m_key_evt_to_command_map.at(key);
 		if ((translatedEvent.size() == 1) || (translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYDOWN)) {
 			return translatedEvent[0];
 		}
 
-		else if(translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYUP) {
+		else if (translatedEvent.size() > 1 && evt->type == SDL_EventType::SDL_KEYUP) {
 			return translatedEvent[1];
 		}
-
-		else {
-			LOG_MESSAGE("No command specified for key");
-			return std::make_shared<NullCommand>();
-		}
 	}
-	catch (std::out_of_range) {
+
+
+	else {
+		LOG_MESSAGE("No command specified for key");
 		return std::make_shared<NullCommand>();
 	}
+
 			
 }
 

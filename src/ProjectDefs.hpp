@@ -52,6 +52,14 @@
       return std::nullopt; \
    } \
 
+#define CHECK_IF_POINTER_VALID_RETURN_NULLPTR(ptr) \
+if (nullptr == ptr) \
+   { \
+      LOG_ERROR("Given pointer '" << #ptr << "' is null!!!"); \
+      assert(nullptr != ptr); \
+      return nullptr; \
+   } \
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Watch macros
 #define WATCH_VALUE_MESSAGE(value) LogMessage(#value << " is: " << value);
