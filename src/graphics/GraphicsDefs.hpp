@@ -1,6 +1,11 @@
 #pragma once
 
+#include "SDL_render.h"
+
+#include <functional>
 #include <stdint.h>
+
+using RenderInstruction_t = std::function<bool(SDL_Renderer&)>;
 
 // @note This list is not obviously all encompassing for the color spectrum, feel free to add colors
 enum class Color

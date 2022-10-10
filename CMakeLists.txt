@@ -49,3 +49,9 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
                    ${SDL2_LIBRARY_DIR}/SDL2d.dll
                    ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+
+## Move the SDL2_image.dll into the build directory
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                   ${SDL2_IMAGE_LIBRARY_DIR}/SDL2_imaged.dll
+                   ${CMAKE_CURRENT_BINARY_DIR}/Debug)

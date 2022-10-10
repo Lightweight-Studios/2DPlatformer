@@ -1,6 +1,7 @@
 #include "Window.hpp"
 
 #include "Logger.hpp"
+#include "ProjectDefs.hpp"
 
 #include "SDL.h"
 
@@ -19,7 +20,7 @@ Window::Window(SDL_Window* i_sdl_window, Renderer&& renderer) :
    m_sdl_window(i_sdl_window),
    m_renderer(std::make_unique<Renderer>(std::move(renderer)))
 {
-   assert(nullptr != i_sdl_window);
+   CHECK_IF_POINTER_VALID(i_sdl_window);
 }
 
 Window::Window(Window&& other) :
@@ -58,7 +59,7 @@ std::optional<Window> Window::create()
                                       SDL_WINDOW_SHOWN);
    if (nullptr == sdl_window)
    {
-      LOG_ERROR("Failed to create an SDL window");
+      LOG_ERROR("Failed to create an SDL window, SDL error: " << SDL_GetError());
       return std::nullopt;
    }
 

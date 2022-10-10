@@ -2,23 +2,27 @@
 
 #ifndef SILENCE_LOGGING
 
+   #include <chrono>
    #include <iostream>
 
    #define LOG_MESSAGE(message) \
-      std::cout << "LOG | " << __FILE__ << " - " << \
-                               __func__ << " - " << \
-                               __LINE__ << ": " << \
-                               message << std::endl;
+      std::cout << "LOG|" << std::chrono::system_clock::now() << "|" << \
+                             __FILE__ << ":" << \
+                             __LINE__ << ":" << \
+                             __func__ << ": " << \
+                             message << std::endl;
    #define LOG_WARNING(warning) \
-      std::cout << "WRN | " << __FILE__ << " - " << \
-                               __func__ << " - " << \
-                               __LINE__ << ": " << \
-                               warning << std::endl;
+      std::cout << "WRN|" << std::chrono::system_clock::now() << "|" << \
+                             __FILE__ << ":" << \
+                             __LINE__ << ":" << \
+                             __func__ << ": " << \
+                             warning << std::endl;
    #define LOG_ERROR(error) \
-      std::cerr << "ERR | " << __FILE__ << " - " << \
-                               __func__ << " - " << \
-                               __LINE__ << ": " << \
-                               error << std::endl;
+      std::cerr << "ERR|" << std::chrono::system_clock::now() << "|" << \
+                             __FILE__ << ":" << \
+                             __LINE__ << ":" << \
+                             __func__ << ": " << \
+                             error << std::endl;
 
 #else 
 

@@ -10,6 +10,8 @@ using namespace Graphics;
 
 void Graphics::initialize()
 {
+   LOG_MESSAGE("Enter Graphics::initialize()");
+
    // Initialize SDL
    if (0 != SDL_Init(SDL_INIT_VIDEO))
    {
@@ -24,6 +26,8 @@ void Graphics::initialize()
    {
       LOG_WARNING("Failed to set linear texture filtering option");
    }
+
+   LOG_MESSAGE("Exit Graphics::initialize()");
 }
 
 void Graphics::teardown()

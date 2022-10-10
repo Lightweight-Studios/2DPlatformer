@@ -19,12 +19,12 @@ public:
 
    Window() = delete;
    Window(const Window&) = delete;
-   Window(Window&& other);
+   Window(Window&&);
 
    virtual ~Window();
 
    Window& operator=(const Window&) = delete;
-   Window& operator=(Window&& rhs);
+   Window& operator=(Window&&);
 
    static std::optional<Window> create();
 

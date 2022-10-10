@@ -1,9 +1,24 @@
+# Introduction
+## What are we Making?
+Still figuring that out, for now just trying to get the basics of game setup going so we can extrapolate on that and make a 2D Platformer game
 
 # Building
+## Platforms
+Currently we have no expected limitations on platform/operating system, though we are thus far both developing on Windows machines and generally gearing things towards a keyboard & mouse environment. Stay tuned for updates there.
+
+## Languages & Tools
+* C/C++ for most core logic
+* CMake for project setup and build tooling
+* GoogleTest for project unit testing
+* Python for build scripting and convenience tools
+* Lua for in-game scripting
+* JSON for file-based data formatting
+
 ## Dependencies
-* C++20
+* C++20, C99
 * CMake 3.23+
 * SDL2
+* SDL2_image
 
 ## Instructions
 1. Create build directory 'build' at same level as src, doc, tests AKA {PROJECT_PATH}
@@ -16,11 +31,16 @@
 * Only debug builds supported currently
 
 # Contributing
+## Folks
+* Luke Soldano, new game dev, experienced C++ guy
+* Colby Simpson, another new game dev, new to C++ (and killing it)
+
 ## Style Guide
 This is a loose style guide to follow for consistency. It is not the only way to do things.
 
 * Use spaces, not tabs (three spaces for indentation)
 * As much as possible limit any lines length to 100 characters
+* Minimize indentations on class definitions, switch statements, etc - if you can use class/public, and switch/case on the same column that would be kewl
 * Define a functions return value, name, and (at minimum) first input on a single line
    * Only template definitions and arguments after the first should be on separate lines
 * Use #pragma once at the start of ever header file
@@ -32,3 +52,5 @@ This is a loose style guide to follow for consistency. It is not the only way to
 * If a variable is a static, prefix it with 's ' if it is global 'g ' if it is a class member 'm', optionally if its an input, output, or input and output use 'i', 'o', or 'io' respectively 
    * Follow all letter prefixes with an underscore  EG: i_my_input
 * Constants should follow the format of being entirely capitalized and underscore separated EG: MY_CONSTANT
+* Minimize the use of if, while, for, and other enclosure statements that don't use curly braces, E.G. Minimize while(condition) func(); if(condition) doThing();
+   * Obviously there are cases where statements like this can be helpful, but it should not be the general preference

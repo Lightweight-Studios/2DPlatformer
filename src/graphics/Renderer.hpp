@@ -1,8 +1,12 @@
 #pragma once
 
 #include "GraphicsDefs.hpp"
+#include "Surface.hpp"
+#include "Texture.hpp"
 
+#include <functional>
 #include <optional>
+#include <vector>
 
 // Forward declarations
 class SDL_Window;
@@ -23,16 +27,22 @@ public:
    virtual ~Renderer();
 
    Renderer& operator=(const Renderer&) = delete;
-   Renderer& operator=(Renderer&& rhs);
+   Renderer& operator=(Renderer&&);
 
    static std::optional<Renderer> create(SDL_Renderer* i_sdl_renderer);
 
-   bool render();
+   bool render_present();
 
-   std::optional<RgbaColor> get_draw_color();
-   bool set_draw_color(RgbaColor color);
+   // @TODO Consider if RenderInstructions with internal SDL logic and access to SDL_Renderer are
+   //       the best course of action
+   bool render(RenderInstruction_t&& i_render_instruction);
+   bool render(std::vector<RenderInstruction_t>&& i_render_instructions);
 
-   bool draw_shape();
+   std::optional<RgbaColor> get_draw_color() const;
+   bool set_draw_color(RgbaColor i_color);
+
+   // @TODO Refactor once we change how Surface provides SDL_Surface* more cleverly
+   std::optional<Texture> create_texture_from_surface(Surface&& i_surface);
    
 private:
 
@@ -42,4 +52,4 @@ private:
 
 };
 
-} // namespace Window
+} // namespace Graphics

@@ -12,7 +12,7 @@ using namespace Graphics;
 Renderer::Renderer(SDL_Renderer* i_sdl_renderer) :
    m_sdl_renderer(i_sdl_renderer)
 {
-   assert(nullptr != i_sdl_renderer);
+   CHECK_IF_POINTER_VALID(i_sdl_renderer);
 }
 
 Renderer::Renderer(Renderer&& other) :
@@ -45,16 +45,16 @@ std::optional<Renderer> Renderer::create(SDL_Renderer* i_sdl_renderer)
    if (nullptr != i_sdl_renderer)
    {
       // Create renderer and set a default draw color just because
-      auto renderer = Renderer(i_sdl_renderer);
-      renderer.set_draw_color(Color::white);
-      return renderer;
+      auto o_renderer = std::optional<Renderer>({i_sdl_renderer});
+      o_renderer.value().set_draw_color(Color::white);
+      return o_renderer;
    }
 
    LOG_ERROR("Null i_sdl_renderer passed to factory");
    return std::nullopt;
 }
 
-bool Renderer::render()
+bool Renderer::render_present()
 {
    CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);
    SDL_RenderPresent(m_sdl_renderer);
@@ -62,7 +62,25 @@ bool Renderer::render()
    return true;
 }
 
-std::optional<RgbaColor> Renderer::get_draw_color()
+bool Renderer::render(RenderInstruction_t&& i_render_instruction)
+{
+   CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);
+   return i_render_instruction(*m_sdl_renderer);
+}
+
+bool Renderer::render(std::vector<RenderInstruction_t>&& i_render_instructions)
+{
+   CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);
+
+   bool o_all_renders_successful = true;
+   for (const auto& instruction : i_render_instructions)
+   {
+      o_all_renders_successful &= instruction(*m_sdl_renderer);
+   }
+   return o_all_renders_successful;
+}
+
+std::optional<RgbaColor> Renderer::get_draw_color() const
 {
    CHECK_IF_POINTER_VALID_RETURN_NULLOPT(m_sdl_renderer);
 
@@ -80,11 +98,15 @@ std::optional<RgbaColor> Renderer::get_draw_color()
    return o_color;
 }
 
-bool Renderer::set_draw_color(RgbaColor color)
+bool Renderer::set_draw_color(RgbaColor i_color)
 {
    CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);
 
-   if (0 != SDL_SetRenderDrawColor(m_sdl_renderer, color.m_r, color.m_g, color.m_b, color.m_a))
+   if (0 != SDL_SetRenderDrawColor(m_sdl_renderer, 
+                                   i_color.m_r, 
+                                   i_color.m_g, 
+                                   i_color.m_b, 
+                                   i_color.m_a))
    {
       LOG_WARNING("Failed to set draw color, SDL Error: " << SDL_GetError());
       return false;
@@ -93,16 +115,19 @@ bool Renderer::set_draw_color(RgbaColor color)
    return true;
 }
 
-bool Renderer::draw_shape()
+std::optional<Texture> Renderer::create_texture_from_surface(Surface&& i_surface)
 {
-   CHECK_IF_POINTER_VALID_RETURN_BOOL(m_sdl_renderer);
+   CHECK_IF_POINTER_VALID_RETURN_NULLOPT(m_sdl_renderer);
+   CHECK_IF_POINTER_VALID_RETURN_NULLOPT(i_surface.get_sdl_surface());
 
-   SDL_Rect rect{100, 100, 100, 100};
-   if (0 != SDL_RenderFillRect(m_sdl_renderer, &rect))
+   auto texture = SDL_CreateTextureFromSurface(m_sdl_renderer, i_surface.get_sdl_surface());
+   if (nullptr == texture)
    {
-      LOG_WARNING("Failed to set draw color, SDL Error: " << SDL_GetError());
-      return false;
+      LOG_ERROR("Failed to create an SDL texture from surface, SDL error: " << SDL_GetError());
+      return std::nullopt;
    }
 
-   return true;
+   Texture asdasd(texture);
+   return std::nullopt;
+   // return std::optional<Texture>({texture});
 }
