@@ -26,9 +26,12 @@ Currently we have no expected limitations on platform/operating system, though w
 3. cmake ..
 4. cmake --build ./
 
+NOTE: See root level CMakeLists.txt for possible build options - EG: cmake -DBUILD_UNIT_TESTS=ON ..
+
 ## Known Issues
 * The first attempt to cmake --build will fail, rerun the build to correct the issue
 * Only debug builds supported currently
+* Lots of platform specific CMake code at the moment
 
 # Contributing
 ## Folks

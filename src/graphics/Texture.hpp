@@ -28,13 +28,21 @@ public:
    // @warning Teardown any Texture before exiting the SDL for the sake of cleanliness
    void teardown();
 
+   // @TODO REMOVE, just messin' around
+   SDL_Texture* get_sdl_texture() const { return m_texture; }
+
 private:
 
-   Texture(SDL_Texture* i_texture);
+   // @TODO Move definition to source
+   Texture(SDL_Texture* i_texture) :
+      m_texture(i_texture)
+   {
+      //CHECK_IF_POINTER_VALID(i_texture);
+   }
 
    void teardown_internal();
 
-   SDL_Texture* m_texture;
+   SDL_Texture* m_texture = nullptr;
 
 };
 

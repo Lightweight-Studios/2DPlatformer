@@ -35,6 +35,10 @@ include_directories(${${PROJECT_NAME}_DEPENDENCY_INCLUDE_DIRS}
                     ${${PROJECT_NAME}_INCLUDE_DIRS})
 
 ####################################################################################################
+# Add required definition
+add_definitions(-DASSETS_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/assets")
+
+####################################################################################################
 # Create executable and make necessary library linkages
 add_executable(${PROJECT_NAME} 
                ${${PROJECT_NAME}_SOURCE_FILES}
@@ -55,3 +59,9 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
                    ${SDL2_IMAGE_LIBRARY_DIR}/SDL2_imaged.dll
                    ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+
+####################################################################################################
+# Add unit tests if specified
+if (BUILD_UNIT_TESTS)
+   add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/tests)
+endif ()

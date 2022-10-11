@@ -115,6 +115,7 @@ bool Renderer::set_draw_color(RgbaColor i_color)
    return true;
 }
 
+// @TODO Refactor once we change how Surface provides SDL_Surface* more cleverly
 std::optional<Texture> Renderer::create_texture_from_surface(Surface&& i_surface)
 {
    CHECK_IF_POINTER_VALID_RETURN_NULLOPT(m_sdl_renderer);
@@ -127,7 +128,5 @@ std::optional<Texture> Renderer::create_texture_from_surface(Surface&& i_surface
       return std::nullopt;
    }
 
-   Texture asdasd(texture);
-   return std::nullopt;
-   // return std::optional<Texture>({texture});
+   return std::optional<Texture>({texture});
 }

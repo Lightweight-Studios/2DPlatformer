@@ -35,6 +35,9 @@ public:
 
    // @TODO Consider if RenderInstructions with internal SDL logic and access to SDL_Renderer are
    //       the best course of action
+   // @TODO Consider adding universal ref with concepts to limit to RenderInstruction_t (or other
+   //       solution) as well as iterable container of RenderInstruction_t so vector not required
+   //       as well
    bool render(RenderInstruction_t&& i_render_instruction);
    bool render(std::vector<RenderInstruction_t>&& i_render_instructions);
 

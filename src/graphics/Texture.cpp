@@ -1,17 +1,18 @@
 #include "Texture.hpp"
 
-#include "Logger.hpp"
-#include "ProjectDefs.hpp"
+// #include "Logger.hpp"
+// #include "ProjectDefs.hpp"
 
-#include "SDL.h"
+#include "SDL_render.h"
 
 using namespace Graphics;
 
-Texture::Texture(SDL_Texture* i_texture) :
-   m_texture(i_texture)
-{
-   CHECK_IF_POINTER_VALID(i_texture);
-}
+// @TODO Move definition back to source
+// Texture::Texture(SDL_Texture* i_texture) :
+//    m_texture(i_texture)
+// {
+//    CHECK_IF_POINTER_VALID(i_texture);
+// }
 
 Texture::Texture(Texture&& other) :
    m_texture(other.m_texture)
