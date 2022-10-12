@@ -1,4 +1,4 @@
-message("%% Entering command")
+message("%% Entering Command")
 
 ####################################################################################################
 # Set source files

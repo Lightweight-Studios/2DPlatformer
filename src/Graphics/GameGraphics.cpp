@@ -57,8 +57,6 @@ void GameGraphics::teardown()
       m_window->teardown();
    }
 
-   SDL_Quit();
-
    LOG_MESSAGE("Exit GameGraphics::teardown()");
 }
 
@@ -107,7 +105,7 @@ void GameGraphics::render()
       SDL_Rect render_clip = sonic_sprite_clips[i++%6];
       SDL_Rect render_quad = render_clip;
       render_quad.x = -1 * sprite_width + i*5;
-      render_quad.y = 100;
+      render_quad.y = 350;
       if (0 != SDL_RenderCopy(&i_renderer, sonic_sprite_sheet_texture.get_sdl_texture(), &render_clip, &render_quad))
       {
          LOG_ERROR("Failed to render f-rect, SDL Error: " << SDL_GetError());

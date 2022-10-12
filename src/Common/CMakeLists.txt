@@ -1,4 +1,4 @@
-message("%% Entering common")
+message("%% Entering Common")
 
 ####################################################################################################
 # Set source files

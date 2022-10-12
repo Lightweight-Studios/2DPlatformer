@@ -5,7 +5,6 @@
 namespace FileSystem
 {
 
-
 // @TODO Add helper functions/OS specific implementation help, for now just use raw string
 struct Path
 {

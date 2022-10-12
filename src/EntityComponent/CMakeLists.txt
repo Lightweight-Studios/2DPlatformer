@@ -1,23 +1,22 @@
-message("%% Entering logging")
+message("%% Entering EntityComponent")
 
 ####################################################################################################
 # Set source files
-set(LOGGING_SOURCE_FILES
+set(ENTITY_COMPONENT_SOURCE_FILES
 
-    CACHE INTERNAL "LOGGING_SOURCE_FILES")
+    CACHE INTERNAL "ENTITY_COMPONENT_SOURCE_FILES")
 
 ####################################################################################################
 # Set header files
-set(LOGGING_HEADER_FILES
+set(ENTITY_COMPONENT_HEADER_FILES
 
-    ${CMAKE_CURRENT_LIST_DIR}/Logger.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/EntityComponentDefs.hpp
 
-    CACHE INTERNAL "LOGGING_HEADER_FILES")
+    CACHE INTERNAL "ENTITY_COMPONENT_HEADER_FILES")
 
 ####################################################################################################
 # Set include dirs
-set(LOGGING_INCLUDE_DIRS
-
+set(ENTITY_COMPONENT_INCLUDE_DIRS
     ${CMAKE_CURRENT_LIST_DIR}
 
-    CACHE INTERNAL "LOGGING_INCLUDE_DIRS")
+    CACHE INTERNAL "ENTITY_COMPONENT_INCLUDE_DIRS")

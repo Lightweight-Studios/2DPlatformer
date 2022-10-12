@@ -1,4 +1,4 @@
-message("%% Entering control scheme")
+message("%% Entering ControlScheme")
 
 ####################################################################################################
 # Set source files

@@ -1,4 +1,4 @@
-message("%% Entering graphics")
+message("%% Entering Graphics")
 
 ####################################################################################################
 # Set source files
