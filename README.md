@@ -15,10 +15,11 @@ Currently we have no expected limitations on platform/operating system, though w
 * JSON for file-based data formatting
 
 ## Dependencies
-* C++20, C99
+* C++20
 * CMake 3.23+
 * SDL2
 * SDL2_image
+* GoogleTest
 
 ## Instructions
 1. Create build directory 'build' at same level as src, doc, tests AKA {PROJECT_PATH}
@@ -57,3 +58,10 @@ This is a loose style guide to follow for consistency. It is not the only way to
 * Constants should follow the format of being entirely capitalized and underscore separated EG: MY_CONSTANT
 * Minimize the use of if, while, for, and other enclosure statements that don't use curly braces, E.G. Minimize while(condition) func(); if(condition) doThing();
    * Obviously there are cases where statements like this can be helpful, but it should not be the general preference
+
+# Thanks
+Thanks to lazyfoo and their game development guide as it was immensely helpful in this process.
+
+http://lazyfoo.net/SDL_tutorials/index.php
+
+# Resources that Helped
